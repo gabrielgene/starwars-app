@@ -8,12 +8,13 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "lint:fix": "eslint --ext .js,.jsx,.ts,.tsx ./src --fix",
+    "lint:fix": "eslint --ext .js,.jsx,.ts,.tsx ./src --fix"
   },
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.10",
     "@react-navigation/native": "^5.8.10",
     "@react-navigation/stack": "^5.12.8",
+    "@testing-library/jest-native": "^3.4.3",
     "@types/react-native-vector-icons": "^6.4.6",
     "axios": "^0.21.1",
     "query-string": "^6.13.8",
@@ -30,6 +31,7 @@
     "@babel/core": "^7.8.4",
     "@babel/runtime": "^7.8.4",
     "@react-native-community/eslint-config": "^1.1.0",
+    "@testing-library/react-native": "^7.1.0",
     "@types/jest": "^25.2.3",
     "@types/react-native": "^0.63.2",
     "@types/react-test-renderer": "^16.9.2",
@@ -42,7 +44,19 @@
     "typescript": "^3.8.3"
   },
   "jest": {
-    "preset": "react-native",
+    "moduleNameMapper": {
+      "^<rootDir>/(.*)$": "<rootDir>/src/$1"
+    },
+    "setupFilesAfterEnv": [
+      "./jest.setup.js"
+    ],
+    "transformIgnorePatterns": [
+      "node_modules/(?!(jest-)?react-native|@codler|@react-navigation|react-navigation|react-native-gesture-handler)"
+    ],
+    "setupFiles": [
+      "./node_modules/react-native-gesture-handler/jestSetup.js"
+    ],
+    "preset": "@testing-library/react-native",
     "moduleFileExtensions": [
       "ts",
       "tsx",
