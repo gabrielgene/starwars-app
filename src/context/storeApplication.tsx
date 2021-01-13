@@ -5,6 +5,7 @@ import React, {
   PropsWithChildren,
   useContext,
   useState,
+  useEffect,
 } from 'react';
 import queryString from 'query-string';
 import getAllPeople, {PeopleType} from '@services/getAllPeople';
@@ -18,7 +19,7 @@ interface StoreApplicationContext {
   loadPeople: () => void;
 }
 
-const StoreApplicationContext = createContext<StoreApplicationContext>({
+export const StoreApplicationContext = createContext<StoreApplicationContext>({
   peopleList: [],
   toggleFavorite: () => {},
   loading: false,
@@ -46,6 +47,11 @@ export default function StoreApplicationProvider(props: PropsWithChildren<{}>) {
     setState([...state, ...results]);
     setLoading(false);
   }
+
+  useEffect(() => {
+    loadPeople();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <StoreApplicationContext.Provider
