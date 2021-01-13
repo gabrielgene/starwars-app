@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import {useNavigation, useRoute, RouteProp} from '@react-navigation/native';
 import {useStoreApplicationContext} from '@context/storeApplication';
+import Loading from '@components/Loading';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 type ParamList = {
@@ -21,12 +22,17 @@ export default function People() {
   const {toggleFavorite, peopleList} = useStoreApplicationContext();
   const route = useRoute<LoginPassRouteProp>();
   const {name, idx} = route.params;
+
   const currentPeople = peopleList[idx];
 
   useEffect(() => {
     setOptions({title: name});
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  if (peopleList.length === 0) {
+    return <Loading loading />;
+  }
 
   const {
     height,
@@ -52,9 +58,11 @@ export default function People() {
           <Text style={styles.text}>Gender: {gender}</Text>
         </View>
         <TouchableOpacity
+          testID="ToogleFavorite"
           onPress={() => toggleFavorite(idx)}
           style={styles.favorite}>
           <Icon
+            testID="Icon"
             name="death-star-variant"
             size={30}
             color={favorite ? '#ffe301' : '#fefefe8c'}
