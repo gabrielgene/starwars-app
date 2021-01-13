@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {SafeAreaView, FlatList, StyleSheet} from 'react-native';
 import Loading from '@components/Loading';
 import PeopleItem from '@components/PeopleItem';
@@ -6,11 +6,6 @@ import {useStoreApplicationContext} from '@context/storeApplication';
 
 export default function PeopleList() {
   const {peopleList, loadPeople, loading} = useStoreApplicationContext();
-
-  useEffect(() => {
-    loadPeople();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -41,7 +36,6 @@ const styles = StyleSheet.create({
   list: {
     paddingHorizontal: 20,
   },
-
   listItem: {
     backgroundColor: '#333',
     marginTop: 20,
