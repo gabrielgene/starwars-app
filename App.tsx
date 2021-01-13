@@ -11,11 +11,14 @@
 import React from 'react';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import RootNavigator from '@navigation';
+import StoreApplicationProvider from '@context/storeApplication';
 
 export default function App() {
   return (
     <SafeAreaProvider>
-      <RootNavigator />
+      <StoreApplicationProvider>
+        <RootNavigator />
+      </StoreApplicationProvider>
     </SafeAreaProvider>
   );
 }
