@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {useNavigation} from '@react-navigation/native';
 import {TouchableOpacity, Text, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -13,12 +14,21 @@ type PeopleItemType = {
 
 const PeopleItem: React.FC<PeopleItemType> = ({name, favorite, idx}) => {
   const {navigate} = useNavigation();
+
   return (
     <TouchableOpacity
+      testID={`PeopleItem_${name}`}
       onPress={() => navigate(routes.people.name, {name, idx})}
       style={styles.listItem}>
       <Text style={styles.text}>{name}</Text>
-      {favorite && <Icon name="death-star-variant" size={30} color="#ffe301" />}
+      {favorite && (
+        <Icon
+          testID={`Favorite_${name}`}
+          name="death-star-variant"
+          size={30}
+          color="#ffe301"
+        />
+      )}
     </TouchableOpacity>
   );
 };
