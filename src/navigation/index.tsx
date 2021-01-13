@@ -12,7 +12,11 @@ const AppStack = createStackNavigator();
 function AppStackNavigator() {
   return (
     <AppStack.Navigator mode="modal">
-      <AppStack.Screen name={routes.peopleList.name} component={PeopleList} />
+      <AppStack.Screen
+        name={routes.peopleList.name}
+        component={PeopleList}
+        options={{headerShown: false}}
+      />
       <AppStack.Screen name={routes.people.name} component={People} />
     </AppStack.Navigator>
   );
